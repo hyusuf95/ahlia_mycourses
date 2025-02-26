@@ -23,6 +23,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'mycourses';
+$plugin->component = 'local_mycourses';
 $plugin->version = 20250221;
 $plugin->requires = 20250221; // Moodle version
