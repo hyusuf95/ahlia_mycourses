@@ -22,7 +22,29 @@
  */
 
 
-function local_message_before_footer()
+function local_mycourses_extend_navigation(global_navigation $navigation)
 {
-    die('hello');
+    global $USER, $CFG;
+
+    // Ensure the user is logged in
+    if (!isloggedin() || isguestuser()) {
+        return;
+    }
+
+    // Get the user's enrolled courses
+    $userid = $USER->id;
+    $courses = enrol_get_users_courses($userid, true, 'id, fullname');
+
+    // Check if the user is enrolled in any courses
+    if (empty($courses)) {
+        return;
+    }
+
+    // Build the "My Courses" menu
+    $mycoursesnode = $navigation->add(get_string('mycourses', 'local_mycourses'), null, navigation_node::TYPE_CONTAINER);
+
+    foreach ($courses as $course) {
+        $url = new moodle_url('/course/view.php', ['id' => $course->id]);
+        $mycoursesnode->add(format_string($course->fullname), $url);
+    }
 }
