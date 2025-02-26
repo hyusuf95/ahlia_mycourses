@@ -22,7 +22,7 @@
  */
 
 
-function add_mycourses_to_menuitem()
+function local_message_before_footer()
 {
-    die('add_mycourses_to_menuitem');
+    die('hello');
 }
